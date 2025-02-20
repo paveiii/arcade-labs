@@ -28,8 +28,9 @@ def draw_ashes(x,y):
     arcade.draw_circle_filled(0+x, 0+y, random.randint(1,3), arcade.color.WHITE, 0, -1)
 def draw_fire(p1,p2, color):
     arcade.draw_line(p1 + (random.randint(-400,400)), (random.randint(-300,300)), p2 + (random.randint(1,300)), (random.randint(1,600)), color, random.randint(1,12))
-
-
+def pick_phrase():
+    lista = ("I PUT THE NEW FORGIS ON THE JEEEP","DYING IS NOT AS SCARY AS IT SOUNDS","Well, let´s get this over with.","You'll never get the big picture","Bearing too much weight... Inevitably leads to the collapse of everything.","Maybe it wasn't so bad after all.","No worries man, it's on the house. You'd do the same for me, right?")
+    return lista[random.randint(0,len(lista)-1)]
 arcade.open_window(800, 600, "A Jacket")
 arcade.set_background_color(arcade.color.ALABAMA_CRIMSON)
 
@@ -42,6 +43,10 @@ while(True):
         draw_fire(random.randint(0, 800), random.randint(0, 600),arcade.color.ORANGE)
         draw_fire(random.randint(-50, 50), random.randint(0, 600),arcade.color.BURNT_ORANGE)
     draw_jacket(1.5)
+
+    arcade.draw_text(pick_phrase(),random.randint(-400,400),random.randint(0,600), arcade.color.CATAWBA, random.randint(15,45))
+
     arcade.finish_render()
 
 arcade.run()
+
