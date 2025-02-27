@@ -52,6 +52,9 @@ def main():
 
     playerHasAxe = False
     currentRoom = 1
+
+    print("FIND HIM")
+
     while(True):
         print(roomList[currentRoom].name)
         print(roomList[currentRoom].description)
