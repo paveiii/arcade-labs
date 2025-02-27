@@ -42,7 +42,7 @@ while(True):
     for i in range(1000):
         draw_fire(random.randint(0, 800), random.randint(0, 600),arcade.color.ORANGE)
         draw_fire(random.randint(-50, 50), random.randint(0, 600),arcade.color.BURNT_ORANGE)
-    draw_jacket(1.5)
+    draw_jacket(1.25)
 
     arcade.draw_text(pick_phrase(),random.randint(-400,400),random.randint(0,600), arcade.color.CATAWBA, random.randint(15,45))
 
