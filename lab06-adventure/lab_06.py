@@ -20,9 +20,10 @@ class Room:
         self.west = west
         self.secret = secret
         self.axe = axe
-        self.axe_pop_up()
     def return_adjacent_rooms(self):
         return (self.north,self.east,self.south,self.west)
+    def desecretify(self):
+        self.secret = False
 def main():
     roomList = []
 
@@ -40,7 +41,7 @@ def main():
     roomList.append(hall)
     bigRoom = Room("Big Empty Room", "Could have some lighting in here.", 7, 9, None, 5)
     roomList.append(bigRoom)
-    paintingRoom = Room("Painting Room", "Why all the paintings are cats and feet???", None, 8, 6)
+    paintingRoom = Room("Painting Room", "Why all the paintings are cats and feet???", None, 8, 6,None,False,True)
     roomList.append(paintingRoom)
     storage2 = Room("Small Storage", "Who designed this house???", None, None, None, 7)
     roomList.append(storage2)
@@ -54,18 +55,38 @@ def main():
     while(True):
         print(roomList[currentRoom].name)
         print(roomList[currentRoom].description)
+        possible_rooms = roomList[currentRoom].return_adjacent_rooms()
+
+        if(playerHasAxe):
+           print("Swing axe through walls?")
+           decision = input("(Y/N)")
+           if (decision == "Y"):
+               secrets = False
+               for room in possible_rooms:
+                   if(room != None and roomList[room].secret == True):
+                       roomList[room].desecretify()
+                       print("You found a secret!")
+                       secrets = True
+               if(secrets == False):
+                   print("You just destroyed private propety. Too bad.")
+           else:
+               pass
+        if(roomList[currentRoom].axe and playerHasAxe == False):
+           print("There is an axe laying around. Do you want to pick it up?")
+           decision = input("(Y/N)")
+           if(decision=="Y"):
+               playerHasAxe = True
+           else:
+                pass
+
         print(return_possible_ways(roomList[currentRoom]))
-
-        #if(playerHasAxe):
-        #   print("Swing axe thro walls")
-        #if(roomList[currentRoom].axe and playerHasAxe == False):
-        #   print("There is an axe laying around. Do you want to pick it up?")
-
         nextRoom = move_room(roomList[currentRoom],input())
         if(nextRoom == -1):
             print("You cant go there!")
         else:
-            currentRoom = nextRoom
+            if(roomList[nextRoom].secret):
+                print("You cant go there silly. There is no door!")
+            else: currentRoom = nextRoom
         print("\n")
 
 
