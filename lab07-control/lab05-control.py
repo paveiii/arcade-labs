@@ -27,6 +27,18 @@ class Jacket:
         if(change_y != None): self.position_y += change_y
         if(change_x != None):self.position_x += change_x
 
+        if self.position_x < 200:
+            self.position_x = 200
+
+        if self.position_x > SCREEN_WIDTH - 200:
+            self.position_x = SCREEN_WIDTH - 200
+
+        if self.position_y < 125:
+            self.position_y = 125
+
+        if self.position_y > SCREEN_HEIGHT - 125:
+            self.position_y = SCREEN_HEIGHT - 125
+
 
 class MyGame(arcade.Window):
     def __init__(self):
@@ -34,7 +46,7 @@ class MyGame(arcade.Window):
         # Call the parent class initializer
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control")
 
-        self.jacket = Jacket(0,0)
+        self.jacket = Jacket(500,500)
 
     def on_draw(self):
         self.clear()
